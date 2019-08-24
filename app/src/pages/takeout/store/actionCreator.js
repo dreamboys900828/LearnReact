@@ -19,3 +19,4 @@ export const nearby_shop_list = (nearby_shops) => ({
     payload: nearby_shops
 })
 
+

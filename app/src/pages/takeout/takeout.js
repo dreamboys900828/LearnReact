@@ -12,7 +12,7 @@ export class TakeoutComponent extends Component {
 
     componentDidMount() {
 
-        let { change_geo_hash, change_tarbar_info, change_category_lit } = this.props;
+        let { change_geo_hash, change_tarbar_info, change_category_list } = this.props;
         let query = this.props.history.location.search;
 
         let queArr = query.substr(1).split('=')
@@ -34,7 +34,7 @@ export class TakeoutComponent extends Component {
         msiteFoodTypes(geo_hash)
             .then((res) => {
                 // 传输给reducer 存储
-                change_category_lit(res.data)
+                change_category_list(res.data)
             }).catch(err => {
                 throw new Error(err + 'the resource is empty!')
             })
@@ -141,7 +141,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         change_tarbar_info: (res) => {
             dispatch(tabbar_info_list(res))
         },
-        change_category_lit: (res) => {
+        change_category_list: (res) => {
             dispatch(category_list(res))
         },
         change_nearby_shop_list: (res) => {
