@@ -1,0 +1,16 @@
+.navbar {
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+    background: #fff;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+        .item{
+            padding-top: .05rem;
+            p{
+                padding: .05rem;
+            }
+        }
+}

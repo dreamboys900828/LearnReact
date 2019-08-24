@@ -1,0 +1,54 @@
+.main {
+  padding-top: 0.45rem;
+  .msite_nav {
+    background: #ffffff;
+    padding-bottom: 0.24rem;
+    .wink {
+      margin: 0;
+      .food_types_container {
+        display: flex;
+        flex-wrap: wrap;
+        .link_to_food {
+          flex: 1;
+          min-width: 25%;
+          padding: 0.07rem 0;
+          border-bottom: 1px solid #f7f1f1;
+          border-right: 1px solid #f7f1f1;
+          .child_con {
+            width: 0.5156rem;
+            margin: 0 auto;
+            img {
+              width: 0.4219rem;
+              height: 0.4219rem;
+              margin-bottom: 0.1rem;
+            }
+            span {
+              color: #666666;
+              font-size: 0.1289rem;
+            }
+          }
+        }
+      }
+    }
+  }
+  .msite_main {
+    margin-bottom: 0.5rem;
+    background: #ffffff;
+    .shop-header {
+      margin-top: 0.15rem;
+      height: 0.39rem;
+      line-height: 0.39rem;
+      .shop-collect-o{
+        font-size: 0.16rem;
+        margin: 0 0 0 0.14rem;
+        font-weight: 300;
+        vertical-align: middle;
+      }
+      .span-title {
+        font-size: 0.128rem;
+        font-weight: 300;
+        color: #999999;
+      }
+    }
+  }
+}

@@ -1,0 +1,2 @@
+export const ADDRESS_LIST = 'ADDRESS_LIST'
+export const FLUSH_HISTORY_LIST = 'FLUSH_HISTORY_LIST'

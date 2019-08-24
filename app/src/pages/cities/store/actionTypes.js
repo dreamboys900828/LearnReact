@@ -1,0 +1,1 @@
+export const MAP_CITIES_TYPE = 'MAP_CITIES_TYPE'

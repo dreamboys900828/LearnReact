@@ -1,0 +1,8 @@
+/* 这里的样式也可以作用全局 */
+/* 固定导航条 */
+.am-navbar{
+    position: fixed;
+    left: 0;
+    right: 0;
+    z-index: 2;
+}
