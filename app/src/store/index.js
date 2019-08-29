@@ -1,4 +1,5 @@
-import { createStore, combineReducers } from 'redux';
+import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
+import thunk from 'redux-thunk'
 
 /**
  * 持久化插件 reducer
@@ -37,12 +38,18 @@ const allReducer = combineReducers({
  */
 // const persistedReducer = persistReducer(rootPersistConfig, allReducer)
 
+// 增强函数
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ?
+    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({}) : compose
 
-/* eslint-disable no-underscore-dangle */
+const enhancer = composeEnhancers(applyMiddleware(thunk))
+
+// /* eslint-disable no-underscore-dangle */
 const store = createStore(
-    allReducer, /* preloadedState, */
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+    allReducer,
+    enhancer
+    // /* preloadedState, */
 );
 const persistor = persistStore(store)
 export { store, persistor }
-/* eslint-enable */
+// /* eslint-enable */

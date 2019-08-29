@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import styles from "./cities.module.scss";
-import axios from "axios";
 import { NavBar, Icon } from 'antd-mobile';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux'
-import { mapCitiesAction } from './store/action';
+import { RequestCities } from './store/action';
+// import { mapCitiesAction } from './store/action';
 
 class CitiesComponent extends Component {
 
@@ -68,35 +68,29 @@ class CitiesComponent extends Component {
         );
     }
     // 定位城市
-    requestCities(type) {
-        return axios.get("/v1/cities?type=" + type);
-    }
+    // requestCities(type) {
+    //     return axios.get("/v1/cities?type=" + type);
+    // }
     componentDidMount() {
         // 借助缓存 判断是偶第一次加载 每次进来页面，state都被初始化了
         // 防止多次请求 优化请求
-        let { groupCities } = this.props;
+        let { groupCities, mapCities } = this.props;
+        console.log(this.props)
         if (Object.keys(groupCities).length !== 0) { return }
-        // console.log('componentDidMount')
-        // 处理一个界面，多个请求；可以监听所有请求都成功的回调
-        let guess = this.requestCities("guess");
-        let hot = this.requestCities("hot");
-        let group = this.requestCities("group");
-        axios.all([guess, hot, group])
-            .then((res) => {
-                this.props.mapCities(res)
-            });
+        // 调取城市列表
+        mapCities()
 
     }
 }
 
-//所有城市排序
-const sortCities = (unordered) => {
-    const ordered = {};
-    Object.keys(unordered).sort().forEach(function (key) {
-        ordered[key] = unordered[key];
-    });
-    return ordered;
-}
+// //所有城市排序
+// const sortCities = (unordered) => {
+//     const ordered = {};
+//     Object.keys(unordered).sort().forEach(function (key) {
+//         ordered[key] = unordered[key];
+//     });
+//     return ordered;
+// }
 
 const mapStateToProps = (state, ownProps) => {
     let { guessCity, hotCities, groupCities } = state.page_city
@@ -105,12 +99,9 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
-        mapCities: (res) => {
-            // 让reducer保存城市信息
-            let guessCity = res[0].data
-            let hotCities = res[1].data
-            let groupCities = sortCities(res[2].data)
-            dispatch(mapCitiesAction({ guessCity, hotCities, groupCities }))
+        // 调取城市列表
+        mapCities() {
+            dispatch(RequestCities())
         }
     }
 }

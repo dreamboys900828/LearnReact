@@ -4,15 +4,15 @@ import { Carousel, WingBlank } from 'antd-mobile'
 import { NavBar, Icon } from 'antd-mobile';
 import { NavLink } from 'react-router-dom'
 import style from './takeout.module.scss'
-import { msiteAddress, msiteFoodTypes, shopLists } from '../../service';
-import { user_geo_hash, tabbar_info_list, category_list, nearby_shop_list } from './store/actionCreator';
+import { msiteFoodTypes, shopLists } from '../../service';
+import { category_list, nearby_shop_list, CHANGE_GEO_HASH, CHANGE_TAB_INFO_LIST } from './store/actionCreator';
 import { ShopListStatelessUI } from '../common/shoplist/ShopListStatelessUI';
 
 export class TakeoutComponent extends Component {
 
     componentDidMount() {
 
-        let { change_geo_hash, change_tarbar_info, change_category_list } = this.props;
+        let { change_category_list } = this.props;
         let query = this.props.history.location.search;
 
         let queArr = query.substr(1).split('=')
@@ -21,14 +21,9 @@ export class TakeoutComponent extends Component {
         // if (geo_hash === this.props.geo_hash) return;
 
         // 存储reducer 点击的城市经纬度(以后都会用到这个经纬度)
-        change_geo_hash(geo_hash)
+        CHANGE_GEO_HASH(geo_hash)
         // 调取接口查询当前详细位置信息
-        msiteAddress(geo_hash).then((res) => {
-            // 传输给reducer 存储
-            change_tarbar_info(res.data)
-        }).catch(err => {
-            throw new Error(err + 'the resource is empty!')
-        })
+        CHANGE_TAB_INFO_LIST(geo_hash)
         let [latitude, longitude] = geo_hash.split(',')
         // 存储reducer 分类信息
         msiteFoodTypes(geo_hash)
@@ -135,12 +130,6 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
-        change_geo_hash: (geo_hash) => {
-            dispatch(user_geo_hash({ geo_hash }))
-        },
-        change_tarbar_info: (res) => {
-            dispatch(tabbar_info_list(res))
-        },
         change_category_list: (res) => {
             dispatch(category_list(res))
         },

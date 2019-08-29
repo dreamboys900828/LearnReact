@@ -6,6 +6,7 @@ import { NavLink } from 'react-router-dom'
 import styles from './home.module.scss'
 
 export class HomeComponent extends Component {
+
     render() {
         return (
             <div>
